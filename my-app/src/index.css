@@ -1,0 +1,22 @@
+.statsCard{
+  display:inline-block;
+  margin: 30pt;
+  text-align: center;
+  font-size: 10vw;
+  width: 27vw;
+}
+
+.data{
+  font-size: 1.2em;
+  display: block;
+}
+
+.unit{
+  font-size: 0.5em;
+  display: block;
+}
+
+.desc{
+  font-size: 0.1em;
+  display: block;
+}
