@@ -16,7 +16,7 @@ function App() {
   const [data, setData] = React.useState({})
 
   React.useEffect(()=>{
-    fetch("https://localhost:8889").then(x=>x.json()).then(
+    fetch("stats").then(x=>x.json()).then(
       (res)=>{
           setData(res);
           console.log(res);
@@ -31,9 +31,18 @@ function App() {
 
   return (
     < >
-      <MemberCard cardStat={(data.totNoPilots)?data.totNoPilots : "-" }/>
-      <StatCard cardStat={(data.totNoFlights)?data.totNoFlights : "-" } iconType={"plane-departure"} unit={"Flygningar"}/>
-      <StatCard cardStat={(data.totNoHours)?data.totNoHours : "-" } iconType={"clock"} unit={"Flygtimmar"} />
+
+        <div class="pane">
+          <MemberCard cardStat={(data.totNoPilots)?data.totNoPilots : "-" }/>
+        </div>
+        <div class="pane">
+          <StatCard cardStat={(data.totNoFlights)?data.totNoFlights : "-" } iconType={"plane-departure"} unit={"Flygningar"}/>
+        </div>
+        <div class="pane">
+          <StatCard cardStat={(data.totNoHours)?data.totNoHours : "-" } iconType={"clock"} unit={"Flygtimmar"} />
+        </div>
+
+
     < />
   );
 }

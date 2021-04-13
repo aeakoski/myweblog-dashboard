@@ -4,6 +4,8 @@ const fetch = require('node-fetch');
 const fs = require('fs')
 const https = require('https')
 const app = express();
+const path = require('path');
+
 const { Headers } = require('node-fetch')
 
 const getData = () => {
@@ -11,7 +13,7 @@ const getData = () => {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded")
     myHeaders.append("Cookie", "mwl_cookie_language=se")
-    
+
     let urlencoded = new URLSearchParams()
     urlencoded.append("qtype", "GetFlightLog")
     urlencoded.append("mwl_u", process.env.MYWEBLOG_SYSTEM_USER)
@@ -67,7 +69,9 @@ var totNoPilots = "-"
 updateFlightData()
 setInterval(updateFlightData, 5*60*1000); // 5th min
 
-app.get('/', async (req, res) => {
+
+
+app.get('/stats', async (req, res) => {
 
     res.set("Access-Control-Allow-Origin", "*")
     res.send(
@@ -80,6 +84,12 @@ app.get('/', async (req, res) => {
     );
 });
 
+
+app.use(express.static(path.join(__dirname, 'my-app/build')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'my-app/build', 'index.html'));
+});
 
 https.createServer({
     key: fs.readFileSync('domain.key'),
