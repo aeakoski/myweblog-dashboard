@@ -5,19 +5,28 @@ Set the environment variables needed by the `main.js` server.
 ```
 export MYWEBLOG_SYSTEM_USER=xxx-xxxx
 export MYWEBLOG_SYSTEM_PASSWORD=xxxxxxxxxxxx
+export MYWEBLOG_TOKEN=xxxxxxxxxxxx
 
 npm install
-cd my-app
-npm install
+```
+
+# Build
+**npm build**
+```
+react-scripts build && (npm install)
 ```
 
 # Run
+**npm start**
 ```
-node main.js
-cd my-app
-npm start
+node server.js
+
 ```
-Dashboard should be visible on `localhost:3000`
+Dashboard should be visible on `localhost:8889`
 
 # Preview
 ![alt text](./images/screenshot.png "Screenshot of dashboard")
+
+# Deployment instructions
+
+https://dev.to/myogeshchavan97/how-to-deploy-react-node-js-application-to-heroku-4jb4
