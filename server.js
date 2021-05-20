@@ -5,8 +5,9 @@ const fs = require('fs')
 const https = require('https')
 const app = express();
 const path = require('path');
-
 const { Headers } = require('node-fetch')
+
+const PORT = process.env.PORT || 8889;
 
 const getData = () => {
 
