@@ -85,15 +85,24 @@ app.get('/stats', async (req, res) => {
 });
 
 
-app.use(express.static(path.join(__dirname, 'my-app/build')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'my-app/build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+let dk = (process.env.DOMAIN_KEY == undefined)? fs.readFileSync('domain.key') : process.env.DOMAIN_KEY
+let dc = (process.env.DOMAIN_CRT == undefined)? fs.readFileSync('domain.crt') : process.env.DOMAIN_CRT
+console.log(dk);
+console.log(dc);
+
 https.createServer({
-    key: fs.readFileSync('domain.key'),
-    cert: fs.readFileSync('domain.crt')
+    // key: fs.readFileSync('domain.key'),
+    // cert: fs.readFileSync('domain.crt')
+    // key: process.env.DOMAIN_KEY,
+    // cert: process.env.DOMAIN_CRT
+    key: dk,
+    cert: dc
 }, app)
     .listen(8889, function () {
         console.log('Example app listening on port 8889! Go to https://localhost:8889/')

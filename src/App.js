@@ -19,7 +19,6 @@ function App() {
     fetch("stats").then(x=>x.json()).then(
       (res)=>{
           setData(res);
-          console.log(res);
           console.log(res.totNoFlights);
           console.log(res.totNoHours);
           console.log(res.totNoPilots);
