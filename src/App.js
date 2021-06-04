@@ -16,17 +16,25 @@ function App() {
   const [data, setData] = React.useState({})
 
   React.useEffect(()=>{
+    fetchData();
+    setInterval(()=>{
+      fetchData();
+    },1000*10*60)
+  }, [])
+
+  const fetchData = () => {
     fetch("stats").then(x=>x.json()).then(
       (res)=>{
-          setData(res);
-          console.log(res.totNoFlights);
-          console.log(res.totNoHours);
-          console.log(res.totNoPilots);
+        setData(res);
+        console.log(res.totNoFlights);
+        console.log(res.totNoHours);
+        console.log(res.totNoPilots);
       }
     )
     .catch(console.error)
+  }
 
-  }, [])
+
 
   return (
     < >
