@@ -8,6 +8,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {faClock } from '@fortawesome/free-solid-svg-icons'
 import {faPlaneDeparture } from '@fortawesome/free-solid-svg-icons'
 import {faMapMarked } from '@fortawesome/free-solid-svg-icons'
+
+import ReactCardFlip from 'react-card-flip';
 import StatCard from './components/statCard/statCard.jsx'
 import MemberCard from './components/memberCard/memberCard.jsx'
 import TopList from './components/topList/listCard.jsx'
@@ -16,12 +18,20 @@ library.add(faClock, faPlaneDeparture, faMapMarked)
 
 function App() {
   const [data, setData] = React.useState({})
+  const [isFlipped, setFlip] = React.useState(false)
+
 
   React.useEffect(()=>{
     fetchData();
     setInterval(()=>{
       fetchData();
     },1000*10*60)
+  }, [])
+
+  React.useEffect(()=>{
+    setInterval(() => {
+      setFlip(flip => !flip)
+    }, 20000)
   }, [])
 
   const fetchData = () => {
@@ -38,7 +48,6 @@ function App() {
   }
 
 
-
   return (
     < >
 
@@ -49,13 +58,10 @@ function App() {
           <StatCard cardStat={(data.totNoFlights)?data.totNoFlights : "-" } iconType={"plane-departure"} unit={"Flygningar"}/>
         </div>
         <div class="pane">
-          <StatCard cardStat={(data.totNoHours)?data.totNoHours : "-" } iconType={"clock"} unit={"Flygtimmar"} />
-        </div>
-        <div class="pane">
-          <StatCard cardStat={(data.uniqueNoDestinations)?data.uniqueNoDestinations : "-" } iconType={"map-marked"} unit={"Destinationer"} />
-        </div>
-        <div class="pane">
-          <TopList lista={(data.topFiveDestinations)?data.topFiveDestinations : []} />
+          <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
+            <StatCard cardStat={(data.totNoHours)?data.totNoHours : "-" } iconType={"clock"} unit={"Flygtimmar"} />
+            <StatCard cardStat={(data.uniqueNoDestinations)?data.uniqueNoDestinations : "-" } iconType={"map-marked"} unit={"Destinationer"} />
+          </ReactCardFlip>
         </div>
 
     < />
