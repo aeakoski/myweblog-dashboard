@@ -8,13 +8,14 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {faClock } from '@fortawesome/free-solid-svg-icons'
 import {faPlaneDeparture } from '@fortawesome/free-solid-svg-icons'
 import {faMapMarked } from '@fortawesome/free-solid-svg-icons'
+import {faRuler } from '@fortawesome/free-solid-svg-icons'
 
 import ReactCardFlip from 'react-card-flip';
 import StatCard from './components/statCard/statCard.jsx'
 import MemberCard from './components/memberCard/memberCard.jsx'
 import TopList from './components/topList/listCard.jsx'
 
-library.add(faClock, faPlaneDeparture, faMapMarked)
+library.add(faClock, faPlaneDeparture, faMapMarked, faRuler)
 
 function App() {
   const [data, setData] = React.useState({})
@@ -55,7 +56,10 @@ function App() {
           <MemberCard cardStat={(data.totNoPilots)?data.totNoPilots : "-" }/>
         </div>
         <div class="pane">
-          <StatCard cardStat={(data.totNoFlights)?data.totNoFlights : "-" } iconType={"plane-departure"} unit={"Flygningar"}/>
+          <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
+            <StatCard cardStat={(data.totNoFlights)?data.totNoFlights : "-" } iconType={"plane-departure"} unit={"Flygningar"}/>
+            <StatCard cardStat={(data.totDistance)?data.totDistance : "-" } iconType={"ruler"} unit={"Flugna Km"}/>
+          </ReactCardFlip>
         </div>
         <div class="pane">
           <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >

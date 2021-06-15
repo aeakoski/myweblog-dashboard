@@ -117,6 +117,7 @@ app.get('/stats', async (req, res) => {
         "totNoPilots":totNoPilots,
         "uniqueNoDestinations": uniqueNoDestinations,
         "topFiveDestinations" : destinationList.slice(0,5),
+        "totDistance": totDistance,
         "date": date
       }
     );
