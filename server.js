@@ -56,6 +56,8 @@ const updateFlightData = async () => {
 
     totNoHours = parseInt(data.result.FlightLog.reduce((tot, x) => tot += parseFloat(x.airborne_total), 0))
 
+    totDistance = data.result.FlightLog.reduce((tot, x) => tot += (x.distance) ? parseInt(x.distance) : 0, 0)
+
     let destinations = new Map()
     data.result.FlightLog.forEach((x) => {
       if ((x.departure == "ESSZ") || (x.departure == "NYCKELSJÖN") || (x.departure == "ESSU") ) { return; }
@@ -89,7 +91,10 @@ const updateFlightData = async () => {
     console.log("Total Flights: " + totNoFlights)
     console.log("Total Pilots: " + totNoPilots)
     console.log("Total Destinations: " + uniqueNoDestinations)
+    console.log("Total Distance: " + totDistance)
     console.log(destinationList.slice(0,5))
+
+    //console.log(data.result.FlightLog[0]);
 }
 
 var date = "-"
