@@ -25,8 +25,12 @@ function App() {
   React.useEffect(()=>{
     fetchData();
     setInterval(()=>{
+      var d = new Date();
+      if (d.getHours() < 9 || 20 < d.getHours() ) {
+        return // Dont update during the night, to save heroku application up-time qouta
+      }
       fetchData();
-    },1000*10*60)
+    },1000*60*10) // Fetch every 10:th minute
   }, [])
 
   React.useEffect(()=>{
