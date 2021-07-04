@@ -9,13 +9,14 @@ import {faClock } from '@fortawesome/free-solid-svg-icons'
 import {faPlaneDeparture } from '@fortawesome/free-solid-svg-icons'
 import {faMapMarked } from '@fortawesome/free-solid-svg-icons'
 import {faRuler } from '@fortawesome/free-solid-svg-icons'
+import {faMedal } from '@fortawesome/free-solid-svg-icons'
 
 import ReactCardFlip from 'react-card-flip';
 import StatCard from './components/statCard/statCard.jsx'
 import MemberCard from './components/memberCard/memberCard.jsx'
 import TopList from './components/topList/listCard.jsx'
 
-library.add(faClock, faPlaneDeparture, faMapMarked, faRuler)
+library.add(faClock, faPlaneDeparture, faMapMarked, faRuler, faMedal)
 
 function App() {
   const [data, setData] = React.useState({})
@@ -51,29 +52,29 @@ function App() {
     )
     .catch(console.error)
   }
-
+// TODO: Put back <StatCard cardStat={(data.totDistance)?data.totDistance : "-" } iconType={"ruler"} unit={"Kilometer"}/>
 
   return (
     < >
 
         <div class="pane">
-          <MemberCard cardStat={(data.totNoPilots)?data.totNoPilots : "-" }/>
+            <MemberCard cardStat={(data.totNoPilots)?data.totNoPilots : "-" }/>
         </div>
         <div class="pane">
           <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
             <StatCard cardStat={(data.totNoFlights)?data.totNoFlights : "-" } iconType={"plane-departure"} unit={"Flygningar"}/>
-            <StatCard cardStat={(data.totDistance)?data.totDistance : "-" } iconType={"ruler"} unit={"Flugna Km"}/>
+            <StatCard cardStat={(data.uniqueNoDestinations)?data.uniqueNoDestinations : "-" } iconType={"map-marked"} unit={"Flygfällt"} />
           </ReactCardFlip>
         </div>
         <div class="pane">
-          <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
+        <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
             <StatCard cardStat={(data.totNoHours)?data.totNoHours : "-" } iconType={"clock"} unit={"Flygtimmar"} />
-            <StatCard cardStat={(data.uniqueNoDestinations)?data.uniqueNoDestinations : "-" } iconType={"map-marked"} unit={"Destinationer"} />
-          </ReactCardFlip>
+            <TopList lista={(data.topFiveDestinations)?data.topFiveDestinations : [] } iconType={"medal"} />
+        </ReactCardFlip>
+
         </div>
 
     < />
   );
 }
-
 export default App;
