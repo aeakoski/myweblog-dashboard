@@ -1,5 +1,18 @@
-span{
+.counter{
+  margin-left: 15pt;
+  font-size: 20pt;
+}
 
+.counterIcon{
+  margin-right: 15pt;
+
+}
+
+
+h2 {
+  margin-bottom: 30px;
+  font-size: 4.1vw;
+  font-weight: 800;
 }
 
 li{

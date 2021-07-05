@@ -68,8 +68,8 @@ function App() {
         </div>
         <div class="pane">
         <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
-            <StatCard cardStat={(data.totNoHours)?data.totNoHours : "-" } iconType={"clock"} unit={"Flygtimmar"} />
             <TopList lista={(data.topFiveDestinations)?data.topFiveDestinations : [] } iconType={"medal"} />
+            <StatCard cardStat={(data.totNoHours)?data.totNoHours : "-" } iconType={"clock"} unit={"Flygtimmar"} />
         </ReactCardFlip>
 
         </div>
