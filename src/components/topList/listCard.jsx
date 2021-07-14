@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './toplist.css'
 
 const TopList = function({lista, iconType}){
-  console.log(lista);
 
   let icao = {
     "ESGI":	"Alingsås",
@@ -197,8 +196,8 @@ const TopList = function({lista, iconType}){
     </ol>
 
     <div className="cardText">
-      <span className="unit">Destinationer</span>
-      <i><span className="desc">Top fem besökta</span></i>
+      <span className="unit">Populäraste</span>
+      <i><span className="desc">besökta platserna</span></i>
     </div>
     </div>
   )

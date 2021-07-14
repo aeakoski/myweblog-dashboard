@@ -9,6 +9,8 @@ const { Headers } = require('node-fetch')
 
 const PORT = process.env.PORT || 8889;
 
+const bootTime = Date.now();
+
 const getData = () => {
 
     let myHeaders = new Headers();
@@ -118,7 +120,8 @@ app.get('/stats', async (req, res) => {
         "uniqueNoDestinations": uniqueNoDestinations,
         "topFiveDestinations" : destinationList.slice(0,5),
         "totDistance": totDistance,
-        "date": date
+        "date": date,
+        "bootTime": bootTime
       }
     );
 });

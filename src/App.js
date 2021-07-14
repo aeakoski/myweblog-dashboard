@@ -50,26 +50,27 @@ function App() {
 
     fetch(baseUrl + "stats").then(x=>x.json()).then(
       (res)=>{
+        console.log("Fetching finished")
+
+        if (data.bootTime && res.bootTime) {
+          if (data.bootTime < res.bootTime){
+            console.log("REloading!");
+            window.location.reload();
+          }
+        }
+
         setData(res);
         console.log(res.totNoFlights);
         console.log(res.totNoHours);
         console.log(res.totNoPilots);
+        console.log(res.bootTime);
         console.log(res.topFiveDestinations);
+
       }
     )
     .catch(console.error)
   }
 // TODO: Put back <StatCard cardStat={(data.totDistance)?data.totDistance : "-" } iconType={"ruler"} unit={"Kilometer"}/>
-
-
-
-
-
-
-
-
-
-
 
 
   return (
@@ -81,7 +82,7 @@ function App() {
       <div className="pane">
       <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
         <StatCard cardStat={(data.totNoFlights)?data.totNoFlights : "-" } iconType={"plane-departure"} unit={"Flygningar"} description="fr. flygplatser i hela Sverige, i år"/>
-        <PictureStatCard cardStat={(data.uniqueNoDestinations)?data.uniqueNoDestinations : "-" } picture="flygfallt.png" unit="Flygfällt" description="besökta av klubbmedlemmar, i år" />
+        <PictureStatCard cardStat={(data.uniqueNoDestinations)?data.uniqueNoDestinations : "-" } picture="flygfallt.png" unit="Destinationer" description="besökta av klubbmedlemmar, i år" />
       </ReactCardFlip>
       </div>
 
