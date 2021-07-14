@@ -182,15 +182,24 @@ const TopList = function({lista, iconType}){
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
+
+
   return (
     <div className="statsCard">
-    <h2>Top 5{"\n"}Besökta</h2>
+    <div className="icon">
+      <FontAwesomeIcon icon={iconType} />
+    </div>
 
-      <ol>
-      {lista.map((item, index) => (
-      <li><span>{(icao[item.destination])?icao[item.destination]:capitalize(item.destination.toLowerCase())}</span><span className="counter"><FontAwesomeIcon className="counterIcon" icon={"plane-departure"} />{item.visits}</span></li>
-      ))}
-      </ol>
+    <ol>
+    {lista.map((item, index) => (
+    <li><span>{(icao[item.destination])?icao[item.destination]:capitalize(item.destination.toLowerCase())}</span><span className="counter"><FontAwesomeIcon className="counterIcon" icon={"plane-departure"} />{item.visits}</span></li>
+    ))}
+    </ol>
+
+    <div className="cardText">
+      <span className="unit">Destinationer</span>
+      <i><span className="desc">Top fem besökta</span></i>
+    </div>
     </div>
   )
 }

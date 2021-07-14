@@ -8,10 +8,13 @@ const CardStat = function({cardStat, iconType, unit}){
 
   return (
     <div className="statsCard">
-      <FontAwesomeIcon icon={iconType} />
-
-      <div className="cardText">
+      <div className="icon">
+        <FontAwesomeIcon icon={iconType} />
+      </div>
+      <div className="cardData">
         <span className="data" >{cardStat}</span>
+      </div>
+      <div className="cardText">
         <span className="unit">{unit}</span>
         <i><span className="desc">fr. flygplatser i hela Sverige, 2021</span></i>
       </div>

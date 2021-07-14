@@ -13,7 +13,7 @@ import {faMedal } from '@fortawesome/free-solid-svg-icons'
 
 import ReactCardFlip from 'react-card-flip';
 import StatCard from './components/statCard/statCard.jsx'
-import MemberCard from './components/memberCard/memberCard.jsx'
+import PictureStatCard from './components/pictureStatCard/pictureStatCard.jsx'
 import TopList from './components/topList/listCard.jsx'
 
 library.add(faClock, faPlaneDeparture, faMapMarked, faRuler, faMedal)
@@ -31,14 +31,13 @@ function App() {
         return // Dont update during the night, to save heroku application up-time qouta
       }
       fetchData();
-    //},1000*60*10) // Fetch every 10:th minute
-  },1000*5) // Fetch every 10:th minute
+    },1000*60*10) // Fetch every 10:th minute
   }, [])
 
   React.useEffect(()=>{
     setInterval(() => {
       setFlip(flip => !flip)
-    }, 20000)
+    }, 1000*20)
   }, [])
 
   const fetchData = () => {
@@ -62,25 +61,40 @@ function App() {
   }
 // TODO: Put back <StatCard cardStat={(data.totDistance)?data.totDistance : "-" } iconType={"ruler"} unit={"Kilometer"}/>
 
+
+
+
+
+
+
+
+
+
+
+
   return (
     < >
+      <div className="pane">
+        <PictureStatCard cardStat={(data.totNoPilots)?data.totNoPilots : "-" } picture="osfklogoblack.png" unit="Medlemmar" description="har flugit i år"/>
+      </div>
 
-        <div class="pane">
-            <MemberCard cardStat={(data.totNoPilots)?data.totNoPilots : "-" }/>
-        </div>
-        <div class="pane">
-          <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
-            <StatCard cardStat={(data.totNoFlights)?data.totNoFlights : "-" } iconType={"plane-departure"} unit={"Flygningar"}/>
-            <StatCard cardStat={(data.uniqueNoDestinations)?data.uniqueNoDestinations : "-" } iconType={"map-marked"} unit={"Flygfällt"} />
-          </ReactCardFlip>
-        </div>
-        <div class="pane">
-        <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
-            <TopList lista={(data.topFiveDestinations)?data.topFiveDestinations : [] } iconType={"medal"} />
-            <StatCard cardStat={(data.totNoHours)?data.totNoHours : "-" } iconType={"clock"} unit={"Flygtimmar"} />
-        </ReactCardFlip>
+      <div className="pane">
+      <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
+        <StatCard cardStat={(data.totNoFlights)?data.totNoFlights : "-" } iconType={"plane-departure"} unit={"Flygningar"} description="fr. flygplatser i hela Sverige, i år"/>
+        <PictureStatCard cardStat={(data.uniqueNoDestinations)?data.uniqueNoDestinations : "-" } picture="flygfallt.png" unit="Flygfällt" description="besökta av klubbmedlemmar, i år" />
+      </ReactCardFlip>
+      </div>
 
-        </div>
+      <div className="pane">
+      <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
+        <StatCard cardStat={(data.totNoHours)?data.totNoHours : "-" } iconType={"clock"} unit={"Flygtimmar"} description="fr. flygplatser i hela Sverige, i år"/>
+        <TopList lista={(data.topFiveDestinations)?data.topFiveDestinations : [] } iconType={"map-marked"} />
+      </ReactCardFlip>
+
+      </div>
+
+
+
 
     < />
   );

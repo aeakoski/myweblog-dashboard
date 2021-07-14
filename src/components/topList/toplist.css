@@ -9,18 +9,15 @@
 }
 
 
-h2 {
-  margin-bottom: 30px;
-  font-size: 4.1vw;
-  font-weight: 800;
-}
-
 li{
   text-align: left;
-  font-size: 3vw;
+  font-size: 2vw;
   list-style-type: none;
   padding-bottom: 10px;
 
+}
+ol{
+  margin: 0 0 0 0;
 }
 
 li:after{
