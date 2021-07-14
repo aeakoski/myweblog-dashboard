@@ -31,7 +31,8 @@ function App() {
         return // Dont update during the night, to save heroku application up-time qouta
       }
       fetchData();
-    },1000*60*10) // Fetch every 10:th minute
+    //},1000*60*10) // Fetch every 10:th minute
+  },1000*5) // Fetch every 10:th minute
   }, [])
 
   React.useEffect(()=>{
@@ -41,7 +42,14 @@ function App() {
   }, [])
 
   const fetchData = () => {
-    fetch("stats").then(x=>x.json()).then(
+    let baseUrl = ""
+
+    // Figure out if in dev or prod and set base url to api accordingly
+    if (window.location.href.includes("localhost:3000")) {
+      baseUrl = "http://localhost:8889/"
+    }
+
+    fetch(baseUrl + "stats").then(x=>x.json()).then(
       (res)=>{
         setData(res);
         console.log(res.totNoFlights);
