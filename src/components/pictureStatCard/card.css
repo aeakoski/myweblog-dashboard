@@ -3,13 +3,13 @@
 img{
   max-width: 30vw;
   max-height: 200px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }
 
 @media screen and (max-width: 1200px) {
   img {
     max-width: 30vw;
     max-height: 15vh;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
   }
 }
