@@ -23,7 +23,7 @@ const getData = () => {
     urlencoded.append("mwl_p", process.env.MYWEBLOG_SYSTEM_PASSWORD)
     urlencoded.append("app_token", process.env.MYWEBLOG_TOKEN)
     urlencoded.append("returnType", "JSON")
-    urlencoded.append("from_date", "2021-01-01")
+    urlencoded.append("from_date", "2022-01-01")
     urlencoded.append("limit", "10000")
 
     var today = new Date();
