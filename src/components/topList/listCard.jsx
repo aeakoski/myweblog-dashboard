@@ -191,7 +191,7 @@ const TopList = function({lista, iconType}){
 
     <ol>
     {lista.map((item, index) => (
-    <li><span>{(icao[item.destination])?icao[item.destination]:capitalize(item.destination.toLowerCase())}</span><span className="counter"><FontAwesomeIcon className="counterIcon" icon={"plane-departure"} />{item.visits}</span></li>
+    <li className="underScoreList"><span>{(icao[item.destination])?icao[item.destination]:capitalize(item.destination.toLowerCase())}</span><span className="counter"><FontAwesomeIcon className="counterIcon" icon={"plane-departure"} />{item.visits}</span></li>
     ))}
     </ol>
 

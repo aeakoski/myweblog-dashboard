@@ -10,13 +10,15 @@ import {faPlaneDeparture } from '@fortawesome/free-solid-svg-icons'
 import {faMapMarked } from '@fortawesome/free-solid-svg-icons'
 import {faRuler } from '@fortawesome/free-solid-svg-icons'
 import {faMedal } from '@fortawesome/free-solid-svg-icons'
+import {faPlane } from '@fortawesome/free-solid-svg-icons'
 
 import ReactCardFlip from 'react-card-flip';
 import StatCard from './components/statCard/statCard.jsx'
 import PictureStatCard from './components/pictureStatCard/pictureStatCard.jsx'
 import TopList from './components/topList/listCard.jsx'
+import TopListAirplanes from './components/topListAirplanes/listCard.jsx'
 
-library.add(faClock, faPlaneDeparture, faMapMarked, faRuler, faMedal)
+library.add(faClock, faPlaneDeparture, faMapMarked, faRuler, faMedal, faPlane)
 
 function App() {
   const [data, setData] = React.useState({})
@@ -72,6 +74,15 @@ function App() {
   }
 // TODO: Put back <StatCard cardStat={(data.totDistance)?data.totDistance : "-" } iconType={"ruler"} unit={"Kilometer"}/>
 
+/*
+<ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
+
+  <StatCard cardStat={(data.totNoHours)?data.totNoHours : "-" } iconType={"clock"} unit={"Flygtimmar"} description="fr. flygplatser i hela Sverige, i år"/>
+  <TopList lista={(data.topFiveDestinations)?data.topFiveDestinations : [] } iconType={"map-marked"} />
+</ReactCardFlip>
+
+*/
+
 
   return (
     < >
@@ -87,10 +98,8 @@ function App() {
       </div>
 
       <div className="pane">
-      <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
-        <StatCard cardStat={(data.totNoHours)?data.totNoHours : "-" } iconType={"clock"} unit={"Flygtimmar"} description="fr. flygplatser i hela Sverige, i år"/>
-        <TopList lista={(data.topFiveDestinations)?data.topFiveDestinations : [] } iconType={"map-marked"} />
-      </ReactCardFlip>
+      <TopListAirplanes lista={(data.topFiveAirplanes)?data.topFiveAirplanes : [] } iconType={"plane"} />
+
 
       </div>
 
