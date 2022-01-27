@@ -31,7 +31,7 @@ function App() {
         return // Dont update during the night, to save heroku application up-time qouta
       }
       fetchData();
-    },1000*60*10) // Fetch every 10:th minute
+    },1000*60*180) // Fetch every 180:th minute
   }, [])
 
   React.useEffect(()=>{
