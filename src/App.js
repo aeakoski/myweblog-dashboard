@@ -67,6 +67,7 @@ function App() {
         console.log(res.totNoPilots);
         console.log(res.bootTime);
         console.log(res.topFiveDestinations);
+        console.log(res.airplanes);
 
       }
     )
@@ -87,20 +88,25 @@ function App() {
   return (
     < >
       <div className="pane">
-        <PictureStatCard cardStat={(data.totNoPilots)?data.totNoPilots : "-" } picture="osfklogoblack.png" unit="Medlemmar" description="har flugit i år"/>
+        <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
+          <PictureStatCard cardStat={(data.totNoPilots)?data.totNoPilots : "-" } picture="osfklogoblack.png" unit="Medlemmar" description="har flugit i år"/>
+          <PictureStatCard cardStat={(data.uniqueNoDestinations)?data.uniqueNoDestinations : "-" } picture="flygfallt.png" unit="Destinationer" description="besökta av klubbmedlemmar, i år" />
+        </ReactCardFlip>
+      </div>
+
+
+      <div className="pane">
+        <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
+          <StatCard cardStat={(data.totNoFlights)?data.totNoFlights : "-" } iconType={"plane-departure"} unit={"Flygningar"} description="fr. flygplatser i hela Sverige, i år"/>
+          <StatCard cardStat={(data.totNoHours)?data.totNoHours : "-" } iconType={"clock"} unit={"Flygtimmar"} description="fr. flygplatser i hela Sverige, i år"/>
+        </ReactCardFlip>
       </div>
 
       <div className="pane">
-      <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
-        <StatCard cardStat={(data.totNoFlights)?data.totNoFlights : "-" } iconType={"plane-departure"} unit={"Flygningar"} description="fr. flygplatser i hela Sverige, i år"/>
-        <PictureStatCard cardStat={(data.uniqueNoDestinations)?data.uniqueNoDestinations : "-" } picture="flygfallt.png" unit="Destinationer" description="besökta av klubbmedlemmar, i år" />
-      </ReactCardFlip>
-      </div>
-
-      <div className="pane">
-      <TopListAirplanes lista={(data.topFiveAirplanes)?data.topFiveAirplanes : [] } iconType={"plane"} />
-
-
+        <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped} >
+          <TopList lista={(data.topFiveDestinations)?data.topFiveDestinations : [] } iconType={"map-marked"} />
+          <TopListAirplanes airplanes={(data.airplanes)?data.airplanes : {} } iconType={"plane"} />
+        </ReactCardFlip>
       </div>
 
 

@@ -13,8 +13,8 @@ li{
   text-align: left;
   font-size: 1.5vw;
   list-style-type: none;
-  padding-bottom: 10px;
-
+  padding-bottom: 20px;
+  height: 70px;
 }
 ol{
   margin: 0 0 0 0;
@@ -28,17 +28,20 @@ span{
 
 .progress-bar{
   text-align: left;
+  padding-top: 5px;
   padding-left: 20px;
   background-color: white;
   display: inline-block;
-  min-width:255px;
+  font-family: monospace;
+  font-weight: bolder;
+  width:400px;
   margin-left: 5px;
   color: #252829;
+  position: absolute;
 }
 
 .plane-icon{
   text-align: left;
-
   background-color: white;
   vertical-align:top;
   color: #252829;

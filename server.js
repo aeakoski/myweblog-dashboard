@@ -63,7 +63,7 @@ const addFlightsToPlane = (registration, noFlights, noHours) => {
 
 const updateFlightData = async () => {
     const data = await getData()
-
+    airplanes = {}
     totNoFlights = data.result.FlightLog.reduce((tot, x) => tot += parseInt(x.flights), 0)
 
     data.result.FlightLog.map((x) => addFlightsToPlane(x.regnr, parseInt(x.flights), parseFloat(x.airborne_total) ))
