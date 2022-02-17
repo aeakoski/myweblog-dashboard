@@ -9,7 +9,7 @@
 }
 
 
-li{
+.underScoreList{
   text-align: left;
   font-size: 2vw;
   list-style-type: none;
@@ -20,7 +20,7 @@ ol{
   margin: 0 0 0 0;
 }
 
-li:after{
+.underScoreList:after{
   content: ""; /* This is necessary for the pseudo element to work. */
   display: block; /* This will put the pseudo element on its own line. */
   margin: 0 auto; /* This will center the border. */

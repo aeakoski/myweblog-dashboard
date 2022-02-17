@@ -1,0 +1,48 @@
+.counter{
+  margin-left: 15pt;
+  font-size: 20pt;
+}
+
+.counterIcon{
+  margin-right: 15pt;
+
+}
+
+
+li{
+  text-align: left;
+  font-size: 1.5vw;
+  list-style-type: none;
+  padding-bottom: 20px;
+  height: 70px;
+}
+ol{
+  margin: 0 0 0 0;
+}
+
+
+
+span{
+    display: inline-block;
+}
+
+.progress-bar{
+  text-align: left;
+  padding-top: 5px;
+  padding-left: 20px;
+  background-color: white;
+  display: inline-block;
+  font-family: monospace;
+  font-weight: bolder;
+  width:400px;
+  margin-left: 5px;
+  color: #252829;
+  position: absolute;
+}
+
+.plane-icon{
+  text-align: left;
+  background-color: white;
+  vertical-align:top;
+  color: #252829;
+}

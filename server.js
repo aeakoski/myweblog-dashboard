@@ -1,7 +1,6 @@
 
 const express = require('express');
 const fetch = require('node-fetch');
-const fs = require('fs')
 const http = require('http')
 const app = express();
 const path = require('path');
@@ -48,13 +47,26 @@ const getData = () => {
     return fetch("https://api.myweblog.se/api_mobile.php?version=2.0.3", requestOptions)
         .then(response => response.json())
         .catch(error => console.log('error', error));
+}
 
+const addFlightsToPlane = (registration, noFlights, noHours) => {
+  if (airplanes[registration] === undefined){
+    airplanes[registration] = {
+      "flights": noFlights,
+      "hours": noHours
+    }
+  } else {
+    airplanes[registration]["flights"] = airplanes[registration]["flights"] + noFlights
+    airplanes[registration]["hours"] = airplanes[registration]["hours"] + noHours
+  }
 }
 
 const updateFlightData = async () => {
     const data = await getData()
-
+    airplanes = {}
     totNoFlights = data.result.FlightLog.reduce((tot, x) => tot += parseInt(x.flights), 0)
+
+    data.result.FlightLog.map((x) => addFlightsToPlane(x.regnr, parseInt(x.flights), parseFloat(x.airborne_total) ))
 
     totNoHours = parseInt(data.result.FlightLog.reduce((tot, x) => tot += parseFloat(x.airborne_total), 0))
 
@@ -62,7 +74,7 @@ const updateFlightData = async () => {
 
     let destinations = new Map()
     data.result.FlightLog.forEach((x) => {
-      if ((x.departure == "ESSZ") || (x.departure == "NYCKELSJÖN") || (x.departure == "ESSU") ) { return; }
+      if ((x.departure === "ESSZ") || (x.departure === "NYCKELSJÖN") || (x.departure === "ESSU") ) { return; }
 
       if(destinations.get(x.departure) > 0){
         destinations.set(x.departure, destinations.get(x.departure) + 1)
@@ -72,9 +84,9 @@ const updateFlightData = async () => {
     })
     uniqueNoDestinations = [...destinations.keys()].length +1 // The additional one is for visiting ESSU
 
-    destinationList = [...destinations.keys()].sort((a, b)=>{
+    destinationList = [...destinations.keys()].sort((a, b) => {
       if (destinations.get(a) < destinations.get(b)){ return 1 }
-      if (destinations.get(b) < destinations.get(a)){ return -1 }
+      return -1
     })
     destinationList.forEach((item, i) => {
       destinationList[i] = {
@@ -95,6 +107,7 @@ const updateFlightData = async () => {
     console.log("Total Destinations: " + uniqueNoDestinations)
     console.log("Total Distance: " + totDistance)
     console.log(destinationList.slice(0,5))
+    console.log(airplanes)
 
     //console.log(data.result.FlightLog[0]);
 }
@@ -103,6 +116,10 @@ var date = "-"
 var totNoHours = "-"
 var totNoFlights = "-"
 var totNoPilots = "-"
+var totDistance = 0
+var uniqueNoDestinations = 0
+var destinationList = []
+var airplanes = {}
 
 updateFlightData()
 setInterval(updateFlightData, 5*60*1000); // 5th min
@@ -121,6 +138,7 @@ app.get('/stats', async (req, res) => {
         "topFiveDestinations" : destinationList.slice(0,5),
         "totDistance": totDistance,
         "date": date,
+        "airplanes": airplanes,
         "bootTime": bootTime
       }
     );
