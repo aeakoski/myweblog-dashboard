@@ -31,7 +31,7 @@ const TopListAirplanes = function({airplanes, iconType}){
     {_lista.map((item, index) => (
     <li>
       <span className="progress-bar">
-          {item.["reg"]} - {item.["hours"].toString().padStart(2, '0')}h <FontAwesomeIcon className="counterIcon" icon={"plane"} style={{marginLeft: calculatePlaneMarginPosition(item.hours)}}/>
+          {item["reg"]} - {item["hours"].toString().padStart(2, '0')}h <FontAwesomeIcon className="counterIcon" icon={"plane"} style={{marginLeft: calculatePlaneMarginPosition(item.hours)}}/>
       </span>
       <span className="plane-icon">
       </span>
